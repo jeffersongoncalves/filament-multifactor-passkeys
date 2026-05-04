@@ -6,8 +6,8 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\HtmlString;
+use Livewire\Livewire;
 
 class MultiFactorPasskeysPlugin implements Plugin
 {
@@ -20,16 +20,12 @@ class MultiFactorPasskeysPlugin implements Plugin
     {
         FilamentView::registerRenderHook(
             PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
-            function () use ($panel): View {
-                $redirect = $panel->getUrl() ?? url('/');
-
-                Session::put('passkeys.redirect', $redirect);
-
-                /** @var view-string $view */
-                $view = 'filament-multifactor-passkeys::components.login-button';
-
-                return view($view, ['redirect' => $redirect]);
-            },
+            fn (): HtmlString => new HtmlString(
+                Livewire::mount('filament-multifactor-passkeys-authenticate', [
+                    'guard' => $panel->getAuthGuard(),
+                    'redirectUrl' => $panel->getUrl() ?? url('/'),
+                ])
+            ),
         );
     }
 
