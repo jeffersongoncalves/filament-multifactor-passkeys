@@ -9,7 +9,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jeffersongoncalves/filament-multifactor-passkeys.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-multifactor-passkeys)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/filament-multifactor-passkeys/fix-php-code-style-issues.yml?branch=1.x&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/filament-multifactor-passkeys/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3A1.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/jeffersongoncalves/filament-multifactor-passkeys.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-multifactor-passkeys)
-[![License](https://img.shields.io/packagist/l/jeffersongoncalves/filament-multifactor-passkeys.svg?style=flat-square)](LICENSE.md)
+[![License](https://img.shields.io/github/license/jeffersongoncalves/filament-multifactor-passkeys.svg?style=flat-square)](LICENSE.md)
 
 Multi-factor authentication for Filament v4 panels using WebAuthn passkeys, powered by [`spatie/laravel-passkeys`](https://spatie.be/docs/laravel-passkeys).
 
