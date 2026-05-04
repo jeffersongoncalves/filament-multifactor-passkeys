@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit="generateOptions" class="fmfp-form">
+    <div class="fmfp-form">
         <div class="fmfp-field">
             <label class="fmfp-label" for="fmfp-passkey-name">
                 {{ __('filament-multifactor-passkeys::actions/set-up.modal.form.name.label') }}
@@ -7,6 +7,7 @@
             <input
                 id="fmfp-passkey-name"
                 wire:model="name"
+                wire:keydown.enter="generateOptions"
                 type="text"
                 autocomplete="off"
                 placeholder="{{ __('filament-multifactor-passkeys::actions/set-up.modal.form.name.placeholder') }}"
@@ -19,7 +20,8 @@
 
         <div class="fmfp-actions">
             <x-filament::button
-                type="submit"
+                type="button"
+                wire:click="generateOptions"
                 wire:loading.attr="disabled"
                 wire:target="generateOptions,storePasskey"
             >
@@ -31,7 +33,7 @@
                 </span>
             </x-filament::button>
         </div>
-    </form>
+    </div>
 
     @script
     <script>
