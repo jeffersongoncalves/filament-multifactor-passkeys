@@ -1,7 +1,5 @@
 import * as esbuild from 'esbuild'
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 await esbuild.build({
     entryPoints: [
         'resources/js/passkey.js',
@@ -10,7 +8,7 @@ await esbuild.build({
     outdir: 'resources/dist',
     entryNames: '[name]',
     bundle: true,
-    minify: isProduction,
+    minify: true,
     sourcemap: false,
     target: 'es2020',
     format: 'iife',
