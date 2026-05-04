@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\Filament\MultiFactorPasskeys\Livewire;
 
+use Filament\Notifications\Notification;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +71,12 @@ class AuthenticatePasskey extends Component
         Session::regenerate();
 
         $passkey->update(['last_used_at' => now()]);
+
+        Notification::make()
+            ->title(__('filament-multifactor-passkeys::login_button.notifications.success.title'))
+            ->body(__('filament-multifactor-passkeys::login_button.notifications.success.body'))
+            ->success()
+            ->send();
 
         $this->redirect($this->redirectUrl ?: url('/'), navigate: false);
     }
