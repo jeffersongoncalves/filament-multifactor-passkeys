@@ -70,3 +70,67 @@
     justify-content: flex-start;
     margin-top: 0.5rem;
 }
+
+.fmfp-login-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.fmfp-divider {
+    position: relative;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1rem;
+    color: rgb(107 114 128);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.fmfp-divider::before,
+.fmfp-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 1.75rem);
+    height: 1px;
+    background-color: rgb(229 231 235);
+}
+
+.fmfp-divider::before {
+    left: 0;
+}
+
+.fmfp-divider::after {
+    right: 0;
+}
+
+:where(.dark) .fmfp-divider {
+    color: rgb(156 163 175);
+}
+
+:where(.dark) .fmfp-divider::before,
+:where(.dark) .fmfp-divider::after {
+    background-color: rgb(255 255 255 / 0.1);
+}
+
+.fmfp-login-form {
+    display: flex;
+    justify-content: center;
+}
+
+.fmfp-login-button {
+    width: 100%;
+    justify-content: center;
+}
+
+.fmfp-login-error {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: rgb(var(--danger-600, 220 38 38));
+    background-color: rgb(var(--danger-600, 220 38 38) / 0.1);
+    border: 1px solid rgb(var(--danger-600, 220 38 38) / 0.3);
+    border-radius: 0.5rem;
+}

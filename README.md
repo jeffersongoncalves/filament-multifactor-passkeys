@@ -72,12 +72,13 @@ class User extends Authenticatable implements FilamentUser, HasPasskeyAuthentica
 }
 ```
 
-### 2. Register the provider in your panel
+### 2. Register the MFA provider in your panel
 
-In your `PanelProvider`, register `PasskeyAuthentication` in the `multiFactorAuthentication()` array:
+In your `PanelProvider`, register `PasskeyAuthentication` in the `multiFactorAuthentication()` array. To also expose a "Sign in with a passkey" button on the login screen, register the plugin as well:
 
 ```php
 use Filament\Panel;
+use JeffersonGoncalves\Filament\MultiFactorPasskeys\MultiFactorPasskeysPlugin;
 use JeffersonGoncalves\Filament\MultiFactorPasskeys\PasskeyAuthentication;
 
 public function panel(Panel $panel): Panel
@@ -86,11 +87,14 @@ public function panel(Panel $panel): Panel
         // ...
         ->multiFactorAuthentication([
             PasskeyAuthentication::make(),
-        ]);
+        ])
+        ->plugin(MultiFactorPasskeysPlugin::make());
 }
 ```
 
-That's it. The MFA section in the user profile page now shows a "Passkey verification" entry with **Set up** / **Turn off** buttons. After registering a passkey, the next login will require it as the second factor.
+That's it. The MFA section in the user profile page now shows a "Passkey verification" entry with **Set up** / **Turn off** buttons. The plugin also injects a passkey login button after the standard login form, allowing users to authenticate without typing email/password. After registering a passkey, the next login can use it directly.
+
+> The package auto-registers Spatie's `Route::passkeys()` macro (under the `web` middleware group) so the login button works out of the box. If you've already registered them yourself, the auto-registration is skipped.
 
 ### 3. Customising the redirect URL
 
