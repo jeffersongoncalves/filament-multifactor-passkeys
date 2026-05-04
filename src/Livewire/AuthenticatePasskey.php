@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Spatie\LaravelPasskeys\Actions\FindPasskeyToAuthenticateAction;
 use Spatie\LaravelPasskeys\Actions\GeneratePasskeyAuthenticationOptionsAction;
@@ -16,6 +17,9 @@ class AuthenticatePasskey extends Component
     public string $guard = 'web';
 
     public ?string $redirectUrl = null;
+
+    #[Locked]
+    public ?string $options = null;
 
     public function mount(string $guard = 'web', ?string $redirectUrl = null): void
     {
@@ -35,22 +39,24 @@ class AuthenticatePasskey extends Component
     {
         /** @var GeneratePasskeyAuthenticationOptionsAction $action */
         $action = Config::getAction('generate_passkey_authentication_options', GeneratePasskeyAuthenticationOptionsAction::class);
-        $options = $action->execute();
+        $this->options = $action->execute();
 
-        Session::put('passkey-authentication-options', $options);
-
-        $this->dispatch('passkey-authentication-options-ready', options: json_decode($options));
+        $this->dispatch('passkey-authentication-options-ready', options: json_decode($this->options));
     }
 
     public function authenticate(string $assertion): void
     {
+        if (blank($this->options)) {
+            session()->flash('authenticatePasskey::message', __('filament-multifactor-passkeys::login_button.errors.invalid'));
+
+            return;
+        }
+
         /** @var FindPasskeyToAuthenticateAction $findAction */
         $findAction = Config::getAction('find_passkey', FindPasskeyToAuthenticateAction::class);
 
-        $passkey = $findAction->execute(
-            $assertion,
-            session()->pull('passkey-authentication-options') ?? '',
-        );
+        $passkey = $findAction->execute($assertion, $this->options);
+        $this->options = null;
 
         $authenticatable = $passkey?->authenticatable;
 
