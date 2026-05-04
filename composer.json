@@ -1,6 +1,6 @@
 {
   "name": "jeffersongoncalves/filament-multifactor-passkeys",
-  "description": "Filament 5 multi-factor authentication via WebAuthn passkeys, powered by spatie/laravel-passkeys.",
+  "description": "Filament 4 multi-factor authentication via WebAuthn passkeys, powered by spatie/laravel-passkeys.",
   "keywords": [
     "jeffersongoncalves",
     "laravel",
@@ -28,16 +28,17 @@
   ],
   "require": {
     "php": "^8.2",
-    "filament/filament": "^5.3",
+    "filament/filament": "^4.0",
+    "livewire/livewire": "^3.0",
     "spatie/laravel-package-tools": "^1.14.0",
     "spatie/laravel-passkeys": "^1.0"
   },
   "require-dev": {
     "larastan/larastan": "^3.0",
     "laravel/pint": "^1.21",
-    "orchestra/testbench": "^10.0|^11.0",
-    "pestphp/pest": "^3.0|^4.0",
-    "pestphp/pest-plugin-laravel": "^3.0|^4.0"
+    "orchestra/testbench": "^9.0|^10.0",
+    "pestphp/pest": "^3.0",
+    "pestphp/pest-plugin-laravel": "^3.0"
   },
   "autoload": {
     "psr-4": {
