@@ -4,8 +4,6 @@
 /banners
 *.tsbuildinfo
 composer.lock
-package-lock.json
-pnpm-lock.yaml
 .phpunit.result.cache
 .phpunit.cache
 build

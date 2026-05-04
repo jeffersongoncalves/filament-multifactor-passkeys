@@ -29,6 +29,7 @@ class SetUpPasskeyAuthenticationAction
                     ]),
             ])
             ->modalSubmitAction(false)
+            ->modalCancelAction(false)
             ->modalCancelActionLabel(__('filament-multifactor-passkeys::actions/set-up.modal.actions.cancel.label'));
     }
 }

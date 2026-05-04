@@ -1,0 +1,97 @@
+/* resources/css/passkey.css */
+.fmfp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.fmfp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.fmfp-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: rgb(55 65 81);
+}
+:where(.dark) .fmfp-label {
+  color: rgb(229 231 235);
+}
+.fmfp-input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(3 7 18);
+  background-color: rgb(255 255 255);
+  border: 1px solid rgb(209 213 219);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.fmfp-input::placeholder {
+  color: rgb(156 163 175);
+}
+.fmfp-input:focus {
+  border-color: rgb(var(--primary-500, 59 130 246));
+  box-shadow: 0 0 0 1px rgb(var(--primary-500, 59 130 246));
+}
+:where(.dark) .fmfp-input {
+  color: rgb(255 255 255);
+  background-color: rgb(255 255 255 / 0.05);
+  border-color: rgb(255 255 255 / 0.1);
+}
+:where(.dark) .fmfp-input::placeholder {
+  color: rgb(156 163 175 / 0.7);
+}
+.fmfp-error {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: rgb(var(--danger-600, 220 38 38));
+}
+:where(.dark) .fmfp-error {
+  color: rgb(var(--danger-400, 248 113 113));
+}
+.fmfp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: rgb(255 255 255);
+  background-color: rgb(var(--primary-600, 37 99 235));
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.fmfp-button:hover {
+  background-color: rgb(var(--primary-500, 59 130 246));
+}
+.fmfp-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(255 255 255), 0 0 0 4px rgb(var(--primary-600, 37 99 235));
+}
+:where(.dark) .fmfp-button:focus-visible {
+  box-shadow: 0 0 0 2px rgb(24 24 27), 0 0 0 4px rgb(var(--primary-500, 59 130 246));
+}
+.fmfp-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.fmfp-loading-only {
+  display: none;
+}
+[wire\:loading] .fmfp-loading-only {
+  display: inline;
+}
+[wire\:loading] .fmfp-idle-only {
+  display: none;
+}

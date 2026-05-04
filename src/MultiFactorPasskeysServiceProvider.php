@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\Filament\MultiFactorPasskeys;
 
+use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use JeffersonGoncalves\Filament\MultiFactorPasskeys\Livewire\RegisterPasskey;
@@ -26,6 +27,7 @@ class MultiFactorPasskeysServiceProvider extends PackageServiceProvider
 
         FilamentAsset::register([
             Js::make('filament-multifactor-passkeys', __DIR__.'/../resources/dist/passkey.js'),
+            Css::make('filament-multifactor-passkeys', __DIR__.'/../resources/dist/passkey.css'),
         ], package: 'jeffersongoncalves/filament-multifactor-passkeys');
     }
 }
