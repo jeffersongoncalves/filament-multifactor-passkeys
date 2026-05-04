@@ -17,20 +17,19 @@
             @enderror
         </div>
 
-        <div>
-            <button
+        <div class="fmfp-actions">
+            <x-filament::button
                 type="submit"
-                class="fmfp-button"
                 wire:loading.attr="disabled"
                 wire:target="generateOptions,storePasskey"
             >
-                <span class="fmfp-idle-only">
+                <span wire:loading.remove wire:target="generateOptions,storePasskey">
                     {{ __('filament-multifactor-passkeys::actions/set-up.modal.form.submit.label') }}
                 </span>
-                <span class="fmfp-loading-only">
+                <span wire:loading wire:target="generateOptions,storePasskey">
                     {{ __('filament-multifactor-passkeys::actions/set-up.modal.form.submit.loading_label') }}
                 </span>
-            </button>
+            </x-filament::button>
         </div>
     </form>
 
