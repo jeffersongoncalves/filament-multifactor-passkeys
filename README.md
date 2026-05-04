@@ -15,10 +15,10 @@ Multi-factor authentication for Filament panels using WebAuthn passkeys, powered
 
 ## Compatibility
 
-| Branch | Filament | Laravel        | PHP    | Tag prefix |
+| Branch | Filament | Laravel        | PHP    | Tag format |
 |--------|----------|----------------|--------|------------|
-| `1.x`  | v4       | 11 / 12        | ^8.2   | `v1.x.y`   |
-| `2.x`  | v5       | 12 / 13        | ^8.2   | `v2.x.y`   |
+| `1.x`  | v4       | 11 / 12        | ^8.2   | `1.x.y`    |
+| `2.x`  | v5       | 12 / 13        | ^8.2   | `2.x.y`    |
 
 ## Installation
 
