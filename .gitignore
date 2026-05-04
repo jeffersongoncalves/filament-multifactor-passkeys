@@ -2,6 +2,7 @@
 /node_modules
 /.claude
 /banners
+*.tsbuildinfo
 composer.lock
 package-lock.json
 pnpm-lock.yaml

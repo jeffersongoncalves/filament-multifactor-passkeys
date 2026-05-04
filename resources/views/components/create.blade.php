@@ -1,5 +1,5 @@
 @props(['redirect'])
 
 <div>
-    <x-create-passkey :redirect="$redirect" />
+    <livewire:filament-multifactor-passkeys-register :redirect-url="$redirect" />
 </div>
