@@ -26,8 +26,8 @@
 
     @script
     <script>
-        // Bind once per component instance. @script can be evaluated again for the same
-        // component, and every extra listener turns one click into one more
+        // Bind once per component instance. This block can be evaluated again for the
+        // same component, and every extra listener turns one click into one more
         // startAuthentication call. SimpleWebAuthn aborts the in-flight ceremony each
         // time a new one starts, so the real one dies with:
         //   AbortError: Cancelling existing WebAuthn API call for new one
