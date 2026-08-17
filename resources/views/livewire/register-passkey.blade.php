@@ -37,22 +37,33 @@
 
     @script
     <script>
-        Livewire.on('passkey-registration-options-ready', async function (eventData) {
-            const payload = Array.isArray(eventData) ? eventData[0] : eventData;
-            const options = payload?.options ?? payload;
+        // Bind once per component instance. @script can be evaluated again for the same
+        // component, and every extra listener turns one click into one more
+        // startAuthentication call. SimpleWebAuthn aborts the in-flight ceremony each
+        // time a new one starts, so the real one dies with:
+        //   AbortError: Cancelling existing WebAuthn API call for new one
+        window.__fmfpRegisterBound = window.__fmfpRegisterBound || new Set();
 
-            if (! window.FilamentMultiFactorPasskeys) {
-                console.error('filament-multifactor-passkeys assets not loaded');
-                return;
-            }
+        if (! window.__fmfpRegisterBound.has($wire.id)) {
+            window.__fmfpRegisterBound.add($wire.id);
 
-            try {
-                const passkey = await window.FilamentMultiFactorPasskeys.startRegistration({ optionsJSON: options });
-                @this.call('storePasskey', JSON.stringify(passkey));
-            } catch (err) {
-                console.error('Passkey registration failed:', err);
-            }
-        });
+            Livewire.on('passkey-registration-options-ready', async function (eventData) {
+                const payload = Array.isArray(eventData) ? eventData[0] : eventData;
+                const options = payload?.options ?? payload;
+
+                if (! window.FilamentMultiFactorPasskeys) {
+                    console.error('filament-multifactor-passkeys assets not loaded');
+                    return;
+                }
+
+                try {
+                    const passkey = await window.FilamentMultiFactorPasskeys.startRegistration({ optionsJSON: options });
+                    @this.call('storePasskey', JSON.stringify(passkey));
+                } catch (err) {
+                    console.error('Passkey registration failed:', err);
+                }
+            });
+        }
     </script>
     @endscript
 </div>

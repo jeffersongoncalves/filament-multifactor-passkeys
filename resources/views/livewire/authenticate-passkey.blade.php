@@ -26,22 +26,33 @@
 
     @script
     <script>
-        Livewire.on('passkey-authentication-options-ready', async function (eventData) {
-            const payload = Array.isArray(eventData) ? eventData[0] : eventData;
-            const options = payload?.options ?? payload;
+        // Bind once per component instance. @script can be evaluated again for the same
+        // component, and every extra listener turns one click into one more
+        // startAuthentication call. SimpleWebAuthn aborts the in-flight ceremony each
+        // time a new one starts, so the real one dies with:
+        //   AbortError: Cancelling existing WebAuthn API call for new one
+        window.__fmfpAuthenticateBound = window.__fmfpAuthenticateBound || new Set();
 
-            if (! window.FilamentMultiFactorPasskeys) {
-                console.error('filament-multifactor-passkeys assets not loaded');
-                return;
-            }
+        if (! window.__fmfpAuthenticateBound.has($wire.id)) {
+            window.__fmfpAuthenticateBound.add($wire.id);
 
-            try {
-                const assertion = await window.FilamentMultiFactorPasskeys.startAuthentication({ optionsJSON: options });
-                @this.call('authenticate', JSON.stringify(assertion));
-            } catch (err) {
-                console.error('Passkey authentication failed:', err);
-            }
-        });
+            Livewire.on('passkey-authentication-options-ready', async function (eventData) {
+                const payload = Array.isArray(eventData) ? eventData[0] : eventData;
+                const options = payload?.options ?? payload;
+
+                if (! window.FilamentMultiFactorPasskeys) {
+                    console.error('filament-multifactor-passkeys assets not loaded');
+                    return;
+                }
+
+                try {
+                    const assertion = await window.FilamentMultiFactorPasskeys.startAuthentication({ optionsJSON: options });
+                    @this.call('authenticate', JSON.stringify(assertion));
+                } catch (err) {
+                    console.error('Passkey authentication failed:', err);
+                }
+            });
+        }
     </script>
     @endscript
 </div>
