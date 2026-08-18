@@ -60,6 +60,16 @@
                     const passkey = await window.FilamentMultiFactorPasskeys.startRegistration({ optionsJSON: options });
                     @this.call('storePasskey', JSON.stringify(passkey));
                 } catch (err) {
+                    // WebAuthn reports a cancellation as an error. NotAllowedError is the
+                    // user dismissing the prompt or letting it time out - the browser gives
+                    // both the same name on purpose, so a site cannot tell them apart and
+                    // probe for a credential. AbortError is the ceremony being called off,
+                    // which is what navigating away looks like. Neither is a fault, and
+                    // logging them red sends people hunting a bug that is not there.
+                    if (err?.name === 'NotAllowedError' || err?.name === 'AbortError') {
+                        return;
+                    }
+
                     console.error('Passkey registration failed:', err);
                 }
             });
