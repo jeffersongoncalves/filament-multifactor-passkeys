@@ -2,6 +2,10 @@
 
 All notable changes to `filament-multifactor-passkeys` will be documented in this file.
 
+## 2.0.1 - 2026-08-17
+
+Fix duplicate WebAuthn listener registration when @script is evaluated more than once for the same component, which caused the in-flight authentication/registration ceremony to be aborted (#4).
+
 ## 2.0.0 - 2026-05-04
 
 ### Filament Multifactor Passkeys 2.0.0 — Filament v5
@@ -30,5 +34,6 @@ First public release of the Filament v5 line, tracking the 2.x branch.
 
 ```bash
 composer require jeffersongoncalves/filament-multifactor-passkeys:^2.0
+
 
 ```
