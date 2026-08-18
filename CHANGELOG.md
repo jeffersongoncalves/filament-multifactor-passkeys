@@ -4,7 +4,7 @@ All notable changes to `filament-multifactor-passkeys` will be documented in thi
 
 ## 1.0.1 - 2026-08-17
 
-Fix duplicate WebAuthn listener registration when @script is evaluated more than once for the same component, which caused the in-flight authentication/registration ceremony to be aborted. Ports the fix from #4 (2.x).
+Fix duplicate WebAuthn listener registration when `@script` is evaluated more than once for the same component, which caused the in-flight authentication/registration ceremony to be aborted. Ports the fix from #4 (2.x).
 
 ## 1.0.0 - 2026-05-04
 
