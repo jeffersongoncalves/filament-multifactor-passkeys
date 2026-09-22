@@ -5,9 +5,9 @@
     "build": "node esbuild.config.js"
   },
   "devDependencies": {
-    "esbuild": "^0.28.1"
+    "esbuild": "^0.28.2"
   },
   "dependencies": {
-    "@simplewebauthn/browser": "^11.0.0"
+    "@simplewebauthn/browser": "^14.0.0"
   }
 }
